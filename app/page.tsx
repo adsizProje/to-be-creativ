@@ -3,7 +3,9 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Loader from "@/components/Loader";
-import Gallery from "@/components/Gallery";
+import UxUiGallery from "@/components/UxUiGallery";
+import GraphicGallery from "@/components/GraphicGallery";
+import AnimationGallery from "@/components/AnimationGallery";
 import HeaderNav from "@/components/HeaderNav";
 import HeroLogo from "@/components/HeroLogo";
 import SecondaryLogo from "@/components/SecondaryLogo";
@@ -63,8 +65,16 @@ export default function Home() {
       return <ContactCard />;
     }
 
-    if (activeLeftTab) {
-      return <Gallery key={activeLeftTab} />;
+    if (activeLeftTab === "ux/ui") {
+      return <UxUiGallery key="ux-ui" />;
+    }
+
+    if (activeLeftTab === "graphic") {
+      return <GraphicGallery key="graphic" />;
+    }
+
+    if (activeLeftTab === "animation") {
+      return <AnimationGallery key="animation" />;
     }
 
     return null;

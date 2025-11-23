@@ -34,13 +34,13 @@ export default function HeroLogo({ show, showLogo }: HeroLogoProps) {
                 text="we help brands"
                 disabled={false as any}
                 speed={3}
-                className="custom-class text-xl md:text-5xl tracking-wide"
+                className="custom-class text-4xl md:text-5xl tracking-wide"
               />
               <ShinyText
                 text="to be"
                 disabled={false as any}
                 speed={3}
-                className="custom-class text-xl md:text-5xl tracking-wide"
+                className="custom-class text-4xl md:text-5xl tracking-wide"
               />
             </div>
           </div>
