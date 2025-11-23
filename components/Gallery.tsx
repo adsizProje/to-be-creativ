@@ -12,7 +12,7 @@ export default function Gallery() {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-2.5 p-2 md:p-3 max-w-5xl mx-auto"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-2.5 lg:gap-8 px-4 md:px-3 max-w-6xl mx-auto"
     >
       {images.map((src, index) => (
         <motion.div
