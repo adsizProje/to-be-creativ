@@ -1,21 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
+import HolographicText from "./HolographicText";
+import GlassmorphicCard from "./GlassmorphicCard";
 
 export default function ContactCard() {
   return (
     <motion.div
       key="contact"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="p-4 md:p-8 max-w-2xl mx-auto"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -30 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      className="p-4 md:p-8 max-w-7xl mx-auto"
     >
-      <div className="bg-[#1a1a1a] rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-800">
-        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center text-white">
-          İletişime Geçin
-        </h2>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        {/* Contact Info Card */}
+        <GlassmorphicCard>
+        <div className="text-2xl md:text-3xl font-bold mb-8 text-center">
+          <HolographicText>İletişime Geçin</HolographicText>
+        </div>
         <div className="space-y-6">
           {/* Email */}
           <motion.a
@@ -23,9 +27,15 @@ export default function ContactCard() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex items-center gap-4 p-4 rounded-xl bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors duration-300 group"
+            whileHover={{ scale: 1.02, x: 10 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center gap-4 p-5 rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-400/50 transition-all duration-300 group cursor-pointer"
+            style={{
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+            }}
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-blue-500/50 transition-all duration-300">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -49,9 +59,15 @@ export default function ContactCard() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
-            className="flex items-center gap-4 p-4 rounded-xl bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors duration-300 group"
+            whileHover={{ scale: 1.02, x: 10 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-center gap-4 p-5 rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-green-400/50 transition-all duration-300 group cursor-pointer"
+            style={{
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+            }}
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-green-500/50 transition-all duration-300">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-green-400 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -77,9 +93,15 @@ export default function ContactCard() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4 }}
-            className="flex items-start gap-4 p-4 rounded-xl bg-[#2a2a2a] hover:bg-[#3a3a3a] transition-colors duration-300 group"
+            whileHover={{ scale: 1.02, x: 10 }}
+            whileTap={{ scale: 0.98 }}
+            className="flex items-start gap-4 p-5 rounded-2xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer"
+            style={{
+              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.2)",
+            }}
           >
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-2xl group-hover:shadow-purple-500/50 transition-all duration-300">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-purple-400 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
               <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
@@ -102,6 +124,34 @@ export default function ContactCard() {
             </div>
           </motion.a>
         </div>
+      </GlassmorphicCard>
+
+      {/* Map Card */}
+      <motion.div
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-3 overflow-hidden h-full"
+          style={{
+            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+          }}
+        >
+          <div className="relative w-full h-[600px] rounded-2xl overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.8175724935887!2d32.78579407643204!3d39.90076697152794!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14d347d6d8b9e5d5%3A0x39c58c4944a1ab5e!2sODT%C3%9C%20Teknokent!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="rounded-2xl"
+            />
+          </div>
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+        </div>
+      </motion.div>
       </div>
     </motion.div>
   );

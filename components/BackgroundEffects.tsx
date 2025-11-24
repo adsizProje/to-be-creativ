@@ -12,21 +12,24 @@ export default function BackgroundEffects({ showBackground }: BackgroundEffectsP
     <>
       <LightRays
         raysOrigin="top-center"
-        raysColor="#eae1e1"
+        raysColor="#64c8ff"
         raysSpeed={1.5}
-        lightSpread={0.8}
-        rayLength={1.2}
+        lightSpread={0.4}
+        rayLength={0.8}
         followMouse={true}
-        mouseInfluence={0.1}
-        noiseAmount={0.1}
-        distortion={0.05}
-        className="custom-rays !fixed inset-0"
+        mouseInfluence={0.05}
+        noiseAmount={0.05}
+        distortion={0.02}
+        className="custom-rays !fixed inset-0 opacity-15"
       />
       <motion.div
-        initial={{ x: "-100%" }}
-        animate={showBackground ? { x: "0%" } : { x: "-100%" }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
-        className="absolute inset-0 bg-gradient-to-r from-[#252525] via-[#232323] to-[#373737] z-0"
+        initial={{ opacity: 0 }}
+        animate={showBackground ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="absolute inset-0 z-[1]"
+        style={{
+          background: "radial-gradient(circle at 50% 50%, rgba(100, 200, 255, 0.015) 0%, transparent 60%)",
+        }}
       />
     </>
   );

@@ -34,38 +34,72 @@ export default function HeaderNav({
       {/* Left Navigation */}
       <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-lg md:text-xl font-semibold">
         {leftTabs.map((tab, index) => (
-          <button
+          <motion.button
             key={tab}
             onClick={() => onLeftTabClick(tab)}
-            className={`transition-colors duration-300 hover:text-white ${
+            className={`relative cursor-pointer transition-colors duration-300 ${
               activeLeftTab === tab ? "text-white" : "text-gray-400"
             }`}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {tab}
+            <motion.span
+              className="relative z-10"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              {tab}
+            </motion.span>
+            {activeLeftTab === tab && (
+              <motion.div
+                layoutId="leftActiveTab"
+                className="absolute inset-0 bg-white/10 rounded-lg -z-10"
+                initial={false}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
             {index < leftTabs.length - 1 && (
               <span className="hidden md:inline ml-6 text-gray-600">|</span>
             )}
-          </button>
+          </motion.button>
         ))}
       </nav>
 
       {/* Right Navigation */}
       <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-lg md:text-xl font-semibold">
         {rightTabs.map((tab, index) => (
-          <button
+          <motion.button
             key={tab}
             onClick={() => onRightTabClick(tab)}
-            className={`transition-colors duration-300 hover:text-white ${
+            className={`relative cursor-pointer transition-colors duration-300 ${
               activeRightTab === tab && (tab !== "home" || !activeLeftTab)
                 ? "text-white"
                 : "text-gray-400"
             }`}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {tab}
+            <motion.span
+              className="relative z-10"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              {tab}
+            </motion.span>
+            {activeRightTab === tab && (tab !== "home" || !activeLeftTab) && (
+              <motion.div
+                layoutId="rightActiveTab"
+                className="absolute inset-0 bg-white/10 rounded-lg -z-10"
+                initial={false}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              />
+            )}
             {index < rightTabs.length - 1 && (
               <span className="hidden md:inline ml-6 text-gray-600">|</span>
             )}
-          </button>
+          </motion.button>
         ))}
       </nav>
     </motion.header>

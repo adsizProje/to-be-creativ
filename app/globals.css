@@ -11,12 +11,214 @@
 body {
   font-family: var(--font-baloo), sans-serif;
   overflow-x: hidden;
+  cursor: none;
+}
+
+@media (max-width: 768px) {
+  body {
+    cursor: auto;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(3deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-float {
+  animation: float 10s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 5s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 5s linear infinite;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 1000px 100%;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 3px rgba(0, 255, 255, 0.15),
+                0 0 8px rgba(0, 255, 255, 0.1),
+                0 0 12px rgba(0, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 0 0 8px rgba(0, 255, 255, 0.25),
+                0 0 15px rgba(0, 255, 255, 0.15),
+                0 0 20px rgba(0, 255, 255, 0.1);
+  }
+}
+
+@keyframes neon-flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.9; }
+  75% { opacity: 0.97; }
+}
+
+@keyframes hologram-glitch {
+  0%, 95%, 100% { 
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  96% { 
+    transform: translate(-1px, 1px);
+    filter: hue-rotate(45deg);
+  }
+  98% { 
+    transform: translate(1px, -1px);
+    filter: hue-rotate(90deg);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-neon-flicker {
+  animation: neon-flicker 0.15s ease-in-out infinite;
+}
+
+.animate-hologram-glitch {
+  animation: hologram-glitch 8s ease-in-out infinite;
+}
+
+/* Custom scrollbar for futuristic look */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ffff, #ff00ff);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ffff, #ffff00);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(100, 200, 255, 0.3);
+  color: white;
+}
+
+::-moz-selection {
+  background: rgba(100, 200, 255, 0.3);
+  color: white;
+}
+
+/* Improved text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Modern backdrop blur support */
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+  .backdrop-blur-xl {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+}
+
+/* Bento grid responsive animations */
+@keyframes bento-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.01);
+  }
+}
+
+.animate-bento-float {
+  animation: bento-float 8s ease-in-out infinite;
+}
+
+/* Glassmorphic glow */
+@keyframes glassmorphic-glow {
+  0%, 100% {
+    box-shadow: 
+      0 8px 32px rgba(100, 200, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    box-shadow: 
+      0 8px 32px rgba(100, 200, 255, 0.1),
+      0 0 40px rgba(100, 200, 255, 0.05),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+}
+
+/* Kinetic text shimmer */
+@keyframes text-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(100, 200, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(200, 100, 255, 0.6) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shimmer 6s linear infinite;
 }
 
 

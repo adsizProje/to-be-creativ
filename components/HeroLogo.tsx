@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import ShinyText from "./ShinyText";
+import KineticTypography from "./KineticTypography";
 
 interface HeroLogoProps {
   show: boolean;
@@ -21,28 +21,34 @@ export default function HeroLogo({ show, showLogo }: HeroLogoProps) {
           className="fixed inset-0 z-10 pointer-events-none flex items-center justify-center"
         >
           <div className="text-center">
-            <Image
-              src="/assets/logo_vek.png"
-              alt="ToBe Logo"
-              width={250}
-              height={250}
-              className="mx-auto mb-4"
-              priority
-            />
-            <div className="flex flex-col items-center justify-center mt-2">
-              <ShinyText
-                text="we help brands"
-                disabled={false as any}
-                speed={3}
-                className="custom-class text-4xl md:text-5xl tracking-wide"
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+              whileHover={{ scale: 1.05, rotate: [0, -5, 5, 0] }}
+            >
+              <Image
+                src="/assets/logo_vek.png"
+                alt="ToBe Logo"
+                width={250}
+                height={250}
+                className="mx-auto mb-4"
+                priority
               />
-              <ShinyText
-                text="to be"
-                disabled={false as any}
-                speed={3}
-                className="custom-class text-4xl md:text-5xl tracking-wide"
-              />
-            </div>
+            </motion.div>
+            <motion.div 
+              className="flex flex-col items-center justify-center mt-6 space-y-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <div className="text-3xl md:text-5xl lg:text-6xl">
+                <KineticTypography text="we help brands" />
+              </div>
+              <div className="text-3xl md:text-5xl lg:text-6xl">
+                <KineticTypography text="to be creative" />
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       )}
