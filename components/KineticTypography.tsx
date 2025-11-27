@@ -21,7 +21,7 @@ export default function KineticTypography({ text }: { text: string }) {
   }, [text]);
 
   return (
-    <div className="font-bold text-4xl md:text-6xl lg:text-7xl">
+    <div className="font-bold">
       {displayText.split("").map((char, index) => (
         <motion.span
           key={index}
@@ -32,9 +32,9 @@ export default function KineticTypography({ text }: { text: string }) {
             delay: index * 0.03,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="inline-block bg-clip-text text-transparent bg-gradient-to-br from-white via-cyan-200 to-purple-300"
+          className="inline-block text-white"
           style={{
-            textShadow: "0 0 20px rgba(100, 200, 255, 0.3)",
+            textShadow: "0 0 20px rgba(255, 255, 255, 0.3)",
           }}
         >
           {char === " " ? "\u00A0" : char}

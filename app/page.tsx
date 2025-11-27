@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import Loader from "@/components/Loader";
 import UxUiGallery from "@/components/UxUiGallery";
 import GraphicGallery from "@/components/GraphicGallery";
@@ -15,8 +15,9 @@ import BackgroundEffects from "@/components/BackgroundEffects";
 import MagneticCursor from "@/components/MagneticCursor";
 import InteractiveMeshGradient from "@/components/InteractiveMeshGradient";
 import NoiseTexture from "@/components/NoiseTexture";
+import Image from "next/image";
 
-type LeftTab = "animation" | "graphic" | "ux/ui";
+type LeftTab = "animation" | "graphic" | "savunma";
 type RightTab = "about" | "contact" | "home";
 
 export default function Home() {
@@ -27,6 +28,11 @@ export default function Home() {
   const [activeLeftTab, setActiveLeftTab] = useState<LeftTab | null>(null);
   const [activeRightTab, setActiveRightTab] = useState<RightTab>("home");
   const [effectsEnabled, setEffectsEnabled] = useState(true);
+
+  const { scrollY } = useScroll();
+  const logoScale = useTransform(scrollY, [0, 400], [1, 0.4]);
+  const logoY = useTransform(scrollY, [0, 400], [0, -350]);
+  const logoOpacity = useTransform(scrollY, [350, 400], [1, 0]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -40,18 +46,24 @@ export default function Home() {
     setIsLoading(false);
   };
 
-  const leftTabs: LeftTab[] = ["animation", "graphic", "ux/ui"];
+  const leftTabs: LeftTab[] = ["animation", "graphic", "savunma"];
   const rightTabs: RightTab[] = ["about", "contact", "home"];
 
   const handleLeftTabClick = (tab: LeftTab) => {
     setActiveLeftTab(tab);
     setActiveRightTab("home");
+    // Scroll to section
+    const element = document.getElementById(tab);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   const handleRightTabClick = (tab: RightTab) => {
     setActiveRightTab(tab);
     if (tab === "home") {
       setActiveLeftTab(null);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -102,10 +114,10 @@ export default function Home() {
       );
     }
 
-    if (activeLeftTab === "ux/ui") {
+    if (activeLeftTab === "savunma") {
       return (
         <motion.div
-          key="ux-ui"
+          key="savunma"
           variants={variants}
           initial="initial"
           animate="animate"
@@ -163,14 +175,16 @@ export default function Home() {
       </AnimatePresence>
 
       {!isLoading && (
-        <div className="min-h-screen lg:h-[100dvh] bg-[#0a0a0f] text-white font-baloo relative flex flex-col">
+        <div className="min-h-screen bg-[#0a0a0f] text-white font-baloo relative">
           {/* Base Background Layer - Ultra Premium Interactive Mesh */}
-          <InteractiveMeshGradient />
-          <NoiseTexture />
-          
+          <div className="fixed inset-0 z-0">
+            <InteractiveMeshGradient />
+            <NoiseTexture />
+          </div>
+
           {/* Minimalist Effects Layer */}
           {effectsEnabled && <MagneticCursor />}
-          
+
           {/* Subtle Background Accent */}
           <BackgroundEffects showBackground={showBackground} />
 
@@ -195,8 +209,6 @@ export default function Home() {
             </div>
           </motion.button>
 
-          <HeroLogo show={showHeroLogo} showLogo={showLogo} />
-
           <HeaderNav
             showNav={showNav}
             leftTabs={leftTabs}
@@ -209,8 +221,129 @@ export default function Home() {
 
           <SecondaryLogo show={showSecondaryLogo} onHomeClick={handleHomeClick} />
 
-          <div className="relative z-10 flex-1 overflow-y-auto pb-8 lg:mt-4">
-            <AnimatePresence mode="wait">{renderContent()}</AnimatePresence>
+          {/* Scrollable Content */}
+          <div className="relative z-10">
+            {/* Hero Section with Logo */}
+            {showHeroLogo && (
+              <section className="h-screen flex items-center justify-center">
+                <motion.div
+                  style={{
+                    scale: logoScale,
+                    y: logoY,
+                    opacity: logoOpacity,
+                  }}
+                  className="flex flex-col items-center pointer-events-none"
+                >
+                  <motion.div
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+                  >
+                    <Image
+                      src="/assets/logo_vek.png"
+                      alt="ToBe Logo"
+                      width={250}
+                      height={250}
+                      priority
+                      className="mb-8"
+                    />
+                  </motion.div>
+                  <motion.div
+                    className="flex flex-col items-center justify-center space-y-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                  >
+                    <div className="text-xl md:text-2xl font-bold text-white text-center">
+                      we help brands
+                    </div>
+                    <div className="text-xl md:text-2xl font-bold text-white text-center">
+                      to be creative
+                    </div>
+                  </motion.div>
+                </motion.div>
+              </section>
+            )}
+
+            {/* About Section */}
+            {activeRightTab === "about" && (
+              <section className="h-[calc(100vh-250px)] min-h-[500px] px-4 flex items-center justify-center overflow-hidden">
+                <motion.div
+                  key="about"
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <AboutCard />
+                </motion.div>
+              </section>
+            )}
+
+            {/* Contact Section */}
+            {activeRightTab === "contact" && (
+              <section className="h-[calc(100vh-250px)] min-h-[500px] px-4 flex items-center justify-center overflow-hidden">
+                <motion.div
+                  key="contact"
+                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <ContactCard />
+                </motion.div>
+              </section>
+            )}
+
+            {/* Gallery Sections - Only show when on home */}
+            {activeRightTab === "home" && (
+              <>
+                {/* Animation Section */}
+                <section id="animation" className="min-h-screen py-20 px-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-white">
+                      Animation
+                    </h2>
+                    <AnimationGallery />
+                  </motion.div>
+                </section>
+
+                {/* Savunma Section */}
+                <section id="savunma" className="min-h-screen py-20 px-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-white">
+                      Savunma
+                    </h2>
+                    <UxUiGallery />
+                  </motion.div>
+                </section>
+
+                {/* Graphic Section */}
+                <section id="graphic" className="min-h-screen py-20 px-4">
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <h2 className="text-4xl md:text-6xl font-bold text-center mb-16 text-white">
+                      Graphic Design
+                    </h2>
+                    <GraphicGallery />
+                  </motion.div>
+                </section>
+              </>
+            )}
           </div>
         </div>
       )}

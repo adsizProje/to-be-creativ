@@ -77,7 +77,7 @@ function MediaCard({ item, index }: MediaCardProps) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
-      className="relative aspect-[4/3] overflow-hidden rounded-2xl cursor-pointer group w-full"
+      className="relative aspect-[16/9] overflow-hidden rounded-2xl cursor-pointer group w-full"
       style={{ 
         transformStyle: "preserve-3d",
         boxShadow: isHovered 

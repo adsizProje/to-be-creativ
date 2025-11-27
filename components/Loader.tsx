@@ -112,10 +112,10 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
               }}
             >
               <Image
-                src="/assets/logo_vek.png"
+                src="/assets/logo_white.png"
                 alt="ToBe Logo"
-                width={150}
-                height={150}
+                width={250}
+                height={250}
                 priority
                 className="relative z-10"
               />

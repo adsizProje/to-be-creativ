@@ -13,7 +13,7 @@ export default function HolographicText({ children, className = "" }: Holographi
     <div className={`relative ${className}`}>
       {/* Main text */}
       <motion.div
-        className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400"
+        className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500"
         animate={{
           backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
         }}
@@ -42,7 +42,7 @@ export default function HolographicText({ children, className = "" }: Holographi
           ease: "easeInOut",
         }}
       >
-        <div className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">
+        <div className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-500">
           {children}
         </div>
       </motion.div>
@@ -59,7 +59,7 @@ export default function HolographicText({ children, className = "" }: Holographi
           repeatType: "reverse",
         }}
       >
-        <div className="text-red-500 mix-blend-screen">{children}</div>
+        <div className="text-white/70 mix-blend-screen">{children}</div>
       </motion.div>
 
       <motion.div
@@ -73,7 +73,7 @@ export default function HolographicText({ children, className = "" }: Holographi
           repeatType: "reverse",
         }}
       >
-        <div className="text-cyan-500 mix-blend-screen">{children}</div>
+        <div className="text-gray-400 mix-blend-screen">{children}</div>
       </motion.div>
 
       {/* Scan lines */}

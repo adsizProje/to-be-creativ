@@ -18,7 +18,7 @@ export default function SecondaryLogo({ show, onHomeClick }: SecondaryLogoProps)
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.3 }}
-          className="relative z-10 w-full flex justify-center mb-2 flex-shrink-0 bottom-[5.25rem] lg:bottom-10"
+          className="relative z-10 w-full flex justify-center mt-8 mb-4"
         >
           <motion.button
             onClick={onHomeClick}

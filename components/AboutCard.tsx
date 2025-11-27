@@ -1,9 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { aboutContent } from "@/lib/content";
-import HolographicText from "./HolographicText";
-import GlassmorphicCard from "./GlassmorphicCard";
 
 export default function AboutCard() {
   return (
@@ -13,43 +12,70 @@ export default function AboutCard() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="p-4 md:p-8 max-w-6xl mx-auto"
+      className="relative w-full h-full max-w-6xl mx-auto p-1"
     >
-      <GlassmorphicCard className="group">
-        <div className="relative">
-          <motion.div
+      <div className="absolute inset-0 bg-gradient-to-r from-[#310f4d] via-[#2a2961] to-[#0f3a5d] rounded-[32px] blur-3xl opacity-60 pointer-events-none" />
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-6 h-full items-center rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-xl px-6 py-6 md:px-10 md:py-8 shadow-[0_25px_80px_-35px_rgba(0,0,0,0.8)] overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-10 -left-6 w-44 h-44 bg-fuchsia-500/20 blur-[90px]" />
+          <div className="absolute top-20 -right-10 w-64 h-64 bg-cyan-500/20 blur-[120px]" />
+          <div className="absolute bottom-0 left-1/3 w-48 h-48 bg-purple-500/30 blur-[120px]" />
+        </div>
+
+        {/* Left: Text content */}
+        <div className="relative h-full flex flex-col justify-center text-center md:text-left space-y-3">
+          <motion.h2
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-4 text-center"
+            className="text-4xl md:text-6xl font-extrabold text-white uppercase tracking-wide"
           >
-            <HolographicText>Hakkımızda</HolographicText>
-          </motion.div>
-          <div className="space-y-4">
+            Hakkımızda
+          </motion.h2>
+          <div className="space-y-2 max-w-3xl mx-auto md:mx-0 leading-relaxed text-white/90">
             {aboutContent.map((paragraph, index) => (
               <motion.p
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.15, duration: 0.5 }}
-                className="text-gray-200 leading-relaxed text-sm md:text-base text-center"
+                transition={{ delay: index * 0.05, duration: 0.4 }}
+                className="text-base md:text-lg"
               >
                 {paragraph}
               </motion.p>
             ))}
           </div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1, duration: 0.5 }}
-            className="mt-6 pt-4 border-t border-gray-700 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+            className="text-sm text-white/70 italic md:text-left text-center"
           >
-            <p className="text-xs md:text-sm text-gray-400 italic">
-              &ldquo;Yaratıcılık, cesaret ve teknoloji ile geleceği şekillendiriyoruz.&rdquo;
-            </p>
+            &ldquo;Yaratıcılık, cesaret ve teknoloji ile geleceği şekillendiriyoruz.&rdquo;
           </motion.div>
         </div>
-      </GlassmorphicCard>
+
+        {/* Right: Visual panel with Gemini render */}
+        <motion.div
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative h-[320px] md:h-full rounded-[28px] overflow-hidden ring-1 ring-white/15 shadow-[0_30px_60px_-35px_rgba(0,0,0,0.85)]"
+        >
+          <Image
+            src="/assets/gemini.jpg"
+            alt="VOLINOR savunma projelerinde kullanılan Gemini tasarımı"
+            fill
+            priority
+            sizes="(min-width: 768px) 50vw, 90vw"
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-[#030712]/70 via-transparent to-transparent pointer-events-none" />
+          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur rounded-full px-4 py-1 text-xs uppercase tracking-[0.2em] text-white/80">
+            Gemini
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   );
 }

@@ -37,15 +37,15 @@ export default function HeroLogo({ show, showLogo }: HeroLogoProps) {
               />
             </motion.div>
             <motion.div 
-              className="flex flex-col items-center justify-center mt-6 space-y-3"
+              className="flex flex-col items-center justify-center mt-6 space-y-2"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <div className="text-3xl md:text-5xl lg:text-6xl">
+              <div className="text-xl md:text-2xl">
                 <KineticTypography text="we help brands" />
               </div>
-              <div className="text-3xl md:text-5xl lg:text-6xl">
+              <div className="text-xl md:text-2xl">
                 <KineticTypography text="to be creative" />
               </div>
             </motion.div>

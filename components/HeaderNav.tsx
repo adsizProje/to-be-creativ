@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-type LeftTab = "animation" | "graphic" | "ux/ui";
+type LeftTab = "animation" | "graphic" | "savunma";
 type RightTab = "about" | "contact" | "home";
 
 interface HeaderNavProps {
@@ -32,14 +32,17 @@ export default function HeaderNav({
       className="relative z-20 flex items-center justify-between px-4 lg:px-16 lg:pt-14 pt-4 flex-shrink-0"
     >
       {/* Left Navigation */}
-      <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-lg md:text-xl font-semibold">
+      <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-xl md:text-2xl font-semibold">
         {leftTabs.map((tab, index) => (
           <motion.button
             key={tab}
             onClick={() => onLeftTabClick(tab)}
             className={`relative cursor-pointer transition-colors duration-300 ${
-              activeLeftTab === tab ? "text-white" : "text-gray-400"
+              tab === "savunma" ? "text-yellow-400" : "text-white"
             }`}
+            style={{
+              textShadow: '0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3)'
+            }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -67,16 +70,15 @@ export default function HeaderNav({
       </nav>
 
       {/* Right Navigation */}
-      <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-lg md:text-xl font-semibold">
+      <nav className="flex flex-col md:flex-row gap-2 md:gap-6 text-xl md:text-2xl font-semibold">
         {rightTabs.map((tab, index) => (
           <motion.button
             key={tab}
             onClick={() => onRightTabClick(tab)}
-            className={`relative cursor-pointer transition-colors duration-300 ${
-              activeRightTab === tab && (tab !== "home" || !activeLeftTab)
-                ? "text-white"
-                : "text-gray-400"
-            }`}
+            className="relative cursor-pointer transition-colors duration-300 text-white"
+            style={{
+              textShadow: '0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3)'
+            }}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
