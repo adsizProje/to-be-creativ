@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import InteractiveMeshGradient from "./InteractiveMeshGradient";
-import NoiseTexture from "./NoiseTexture";
 
 export default function Loader({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
@@ -29,11 +27,18 @@ export default function Loader({ onComplete }: { onComplete: () => void }) {
     <motion.div
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#0a0a0f]"
+      className="fixed inset-0 z-50 flex flex-col items-center justify-center"
     >
       {/* Same background as main page */}
-      <InteractiveMeshGradient />
-      <NoiseTexture />
+      <Image
+        src="/assets/background_new.jpeg"
+        alt="Background"
+        fill
+        priority
+        className="object-cover"
+        quality={90}
+      />
+      <div className="absolute inset-0 bg-black/30" />
 
       <div className="relative z-10 flex flex-col items-center">
         {/* Glowing rings around logo */}

@@ -8,7 +8,7 @@ export default function MagneticCursor() {
   const [isVisible, setIsVisible] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
 
-  const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
+  const springConfig = { damping: 30, stiffness: 600, mass: 0.2 };
   const cursorX = useSpring(0, springConfig);
   const cursorY = useSpring(0, springConfig);
 

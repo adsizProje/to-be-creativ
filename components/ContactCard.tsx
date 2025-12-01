@@ -12,15 +12,15 @@ export default function ContactCard() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="p-2 md:p-4 w-full h-full max-w-6xl mx-auto"
+      className="p-2 md:p-3 w-full h-full max-w-6xl mx-auto"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-full items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 h-full items-stretch">
         {/* Contact Info Card */}
         <GlassmorphicCard className="h-full flex flex-col">
-          <div className="text-3xl md:text-4xl font-bold mb-8 text-center">
+          <div className="text-2xl md:text-3xl font-bold mb-5 text-center">
             <HolographicText>İletişime Geçin</HolographicText>
           </div>
-          <div className="space-y-5">
+          <div className="space-y-3">
             {/* Email */}
             <motion.a
               href="mailto:info@tobecreativ.com"
@@ -30,14 +30,14 @@ export default function ContactCard() {
               whileHover={{ scale: 1.02, x: 10 }}
               whileTap={{ scale: 0.98 }}
 
-              className="flex items-center gap-5 p-4 min-h-[80px] md:min-h-[90px] rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-400/50 transition-all duration-300 group cursor-pointer"
+              className="flex items-center gap-4 p-3 min-h-[60px] md:min-h-[70px] rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-blue-400/50 transition-all duration-300 group cursor-pointer"
               style={{
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
               }}
             >
-              <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-blue-500/50 transition-all duration-300">
+              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-blue-500/50 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-400 to-blue-700 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -47,8 +47,8 @@ export default function ContactCard() {
                 </svg>
               </div>
               <div>
-                <p className="text-base text-gray-400">E-posta</p>
-                <p className="text-lg text-white font-medium group-hover:text-blue-400 transition-colors">
+                <p className="text-sm text-gray-400">E-posta</p>
+                <p className="text-base text-white font-medium group-hover:text-blue-400 transition-colors">
                   info@tobecreativ.com
                 </p>
               </div>
@@ -63,14 +63,14 @@ export default function ContactCard() {
               whileHover={{ scale: 1.02, x: 10 }}
               whileTap={{ scale: 0.98 }}
 
-              className="flex items-center gap-5 p-4 min-h-[80px] md:min-h-[90px] rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-green-400/50 transition-all duration-300 group cursor-pointer"
+              className="flex items-center gap-4 p-3 min-h-[60px] md:min-h-[70px] rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-green-400/50 transition-all duration-300 group cursor-pointer"
               style={{
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
               }}
             >
-              <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-green-500/50 transition-all duration-300">
+              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-green-500/50 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-green-400 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -80,8 +80,8 @@ export default function ContactCard() {
                 </svg>
               </div>
               <div>
-                <p className="text-base text-gray-400">Telefon</p>
-                <p className="text-lg text-white font-medium group-hover:text-green-400 transition-colors">
+                <p className="text-sm text-gray-400">Telefon</p>
+                <p className="text-base text-white font-medium group-hover:text-green-400 transition-colors">
                   0 533 30 60 473
                 </p>
               </div>
@@ -98,14 +98,14 @@ export default function ContactCard() {
               whileHover={{ scale: 1.02, x: 10 }}
               whileTap={{ scale: 0.98 }}
 
-              className="flex items-start gap-5 p-4 min-h-[80px] md:min-h-[90px] rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer"
+              className="flex items-start gap-4 p-3 min-h-[60px] md:min-h-[70px] rounded-xl backdrop-blur-xl bg-white/5 border border-white/10 hover:border-purple-400/50 transition-all duration-300 group cursor-pointer"
               style={{
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
               }}
             >
-              <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-purple-500/50 transition-all duration-300">
+              <div className="relative w-11 h-11 rounded-xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:shadow-xl group-hover:shadow-purple-500/50 transition-all duration-300">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-purple-400 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
-                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -116,8 +116,8 @@ export default function ContactCard() {
                 </svg>
               </div>
               <div>
-                <p className="text-base text-gray-400">Adres</p>
-                <p className="text-lg text-white leading-relaxed group-hover:text-purple-400 transition-colors">
+                <p className="text-sm text-gray-400">Adres</p>
+                <p className="text-base text-white leading-relaxed group-hover:text-purple-400 transition-colors">
                   Dumlupınar Blv. ODTÜ Teknokent
                   <br />
                   Bilişim İnovasyon Merkezi 280/G No:1260
@@ -131,12 +131,12 @@ export default function ContactCard() {
 
         {/* Map Card */}
         <motion.div
-          className="h-full"
+          className="h-full max-h-[400px] lg:max-h-[450px]"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3, duration: 0.5 }}
         >
-          <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-3xl p-3 overflow-hidden h-full"
+          <div className="relative backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-2 overflow-hidden h-full"
             style={{
               boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
             }}

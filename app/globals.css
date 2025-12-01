@@ -11,56 +11,13 @@
 body {
   font-family: var(--font-baloo), sans-serif;
   overflow-x: hidden;
-  cursor: none;
+  cursor: auto;
 }
 
-.wave-layer {
-  position: absolute;
-  inset: 0;
-  background-image: url("/assets/wave-bg.jpg");
-  background-size: 120% 120%;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: brightness(0.85) contrast(1.15);
-}
-
-.wave-layer--primary {
-  animation: waveDrift 28s ease-in-out infinite alternate;
-}
-
-.wave-layer--secondary {
-  animation: waveDriftReverse 36s ease-in-out infinite alternate;
-  mix-blend-mode: screen;
-  opacity: 0.45;
-}
-
-@keyframes waveDrift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.05);
-  }
-  50% {
-    transform: translate3d(-2%, -1%, 0) scale(1.1);
-  }
-  100% {
-    transform: translate3d(1%, 1%, 0) scale(1.07);
-  }
-}
-
-@keyframes waveDriftReverse {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.08);
-  }
-  50% {
-    transform: translate3d(1.5%, 1.5%, 0) scale(1.04);
-  }
-  100% {
-    transform: translate3d(-1%, -2%, 0) scale(1.09);
-  }
-}
-
-@media (max-width: 768px) {
+/* Custom cursor only for desktop (1200px+) */
+@media (min-width: 1200px) {
   body {
-    cursor: auto;
+    cursor: none;
   }
 }
 

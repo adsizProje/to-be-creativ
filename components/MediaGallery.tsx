@@ -17,7 +17,7 @@ export default function MediaGallery({ items }: MediaGalleryProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 px-4 md:px-8 lg:px-12 max-w-7xl mx-auto"
+      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 px-4 md:px-8 lg:px-12 w-full max-w-[1920px] mx-auto"
     >
       {items.map((item, index) => (
         <MediaCard key={index} item={item} index={index} />
@@ -151,10 +151,10 @@ function MediaCard({ item, index }: MediaCardProps) {
                 e.stopPropagation();
                 toggleMobileOverlay();
               }}
-              className="absolute top-3 right-3 md:bottom-3 md:top-auto w-10 h-10 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-[100]"
+              className="absolute top-4 right-4 md:bottom-4 md:top-auto w-8 h-8 bg-purple-900/50 backdrop-blur-sm rounded-lg border border-purple-500/40 flex items-center justify-center hover:bg-purple-800/60 transition-colors z-[100]"
               aria-label="Show info"
             >
-              <Info className="w-5 h-5 text-white" />
+              <Info className="w-4 h-4 text-purple-300" />
             </button>
           )}
         </>
@@ -249,10 +249,10 @@ function MediaCard({ item, index }: MediaCardProps) {
               e.stopPropagation();
               toggleMobileOverlay();
             }}
-            className="md:hidden absolute bottom-3 right-3 w-10 h-10 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-20"
+            className="md:hidden absolute bottom-4 right-4 w-8 h-8 bg-purple-900/50 backdrop-blur-sm rounded-lg border border-purple-500/40 flex items-center justify-center hover:bg-purple-800/60 transition-colors z-20"
             aria-label="Show info"
           >
-            <Info className="w-5 h-5 text-white" />
+            <Info className="w-4 h-4 text-purple-300" />
           </button>
         </>
       )}
