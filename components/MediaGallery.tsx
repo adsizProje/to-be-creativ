@@ -265,13 +265,13 @@ function MediaCard({ item, index }: MediaCardProps) {
               e.stopPropagation();
               toggleMobileOverlay();
             }}
-            className="md:hidden absolute bottom-4 right-4 w-8 h-8 bg-purple-900/50 backdrop-blur-sm rounded-lg border border-purple-500/40 flex items-center justify-center hover:bg-purple-800/60 transition-colors z-20"
+            className="md:hidden absolute bottom-4 right-4 w-8 h-8 bg-purple-900/30 backdrop-blur-sm rounded-lg border border-purple-700/20 flex items-center justify-center hover:bg-purple-800/60 transition-colors z-20"
             aria-label="Show info"
           >
-            <Info className="w-4 h-4 text-purple-300" />
-          </button>
-        </>
-      )}
+            <Info className="w-4 h-4 text-purple-700" />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Overlay when info is clicked (for both images and videos) */}
       <AnimatePresence>
