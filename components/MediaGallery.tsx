@@ -17,7 +17,7 @@ export default function MediaGallery({ items }: MediaGalleryProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-2.5 lg:gap-8 px-4 md:px-3 max-w-6xl mx-auto"
+      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1 md:gap-2 lg:gap-3 px-4 md:px-8 lg:px-12 w-full max-w-[1920px] mx-auto"
     >
       {items.map((item, index) => (
         <MediaCard key={index} item={item} index={index} />
@@ -34,6 +34,7 @@ interface MediaCardProps {
 function MediaCard({ item, index }: MediaCardProps) {
   const [showOverlay, setShowOverlay] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const hasContent = item.title || item.description;
@@ -73,16 +74,29 @@ function MediaCard({ item, index }: MediaCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.05, duration: 0.3 }}
-      className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300"
+      transition={{ delay: index * 0.05, duration: 0.5 }}
+      className="relative aspect-[16/9] overflow-hidden rounded-2xl cursor-none group w-full"
+      style={{ 
+        transformStyle: "preserve-3d",
+        boxShadow: isHovered 
+          ? "0 25px 70px -15px rgba(100, 200, 255, 0.5), 0 0 40px rgba(100, 200, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+          : "0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05)"
+      }}
+      whileHover={{ 
+        scale: 1.02,
+        y: -8,
+        transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+      }}
       onMouseEnter={() => {
+        setIsHovered(true);
         if (item.isVideo) {
           handleVideoHover(true);
         }
       }}
       onMouseLeave={() => {
+        setIsHovered(false);
         if (item.isVideo) {
           handleVideoHover(false);
         }
@@ -143,33 +157,77 @@ function MediaCard({ item, index }: MediaCardProps) {
           </AnimatePresence>
 
           {/* Video: Info button (top right on mobile, bottom right on desktop) */}
-          <AnimatePresence>
-            {hasContent && !showOverlay && (
-              <motion.button
-                initial={{ scale: 0, opacity: 0, rotate: -180 }}
-                animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                exit={{ scale: 0, opacity: 0, rotate: 180 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  toggleMobileOverlay();
-                }}
-                className="absolute top-3 right-3 md:bottom-3 md:top-auto w-10 h-10 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-[100]"
-                aria-label="Show info"
-              >
-                <Info className="w-5 h-5 text-white" />
-              </motion.button>
-            )}
-          </AnimatePresence>
+          {hasContent && !showOverlay && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleMobileOverlay();
+              }}
+              className="absolute top-4 right-4 md:bottom-4 md:top-auto w-8 h-8 bg-purple-900/50 backdrop-blur-sm rounded-lg border border-purple-500/40 flex items-center justify-center hover:bg-purple-800/60 transition-colors z-[100]"
+              aria-label="Show info"
+            >
+              <Info className="w-4 h-4 text-purple-300" />
+            </button>
+          )}
         </>
       ) : (
-        <Image
-          src={item.source}
-          alt={item.title || `Gallery image ${index + 1}`}
-          fill
-          className="object-cover hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        <motion.div
+          className="w-full h-full"
+          animate={{ 
+            scale: isHovered ? 1.08 : 1,
+          }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Image
+            src={item.source}
+            alt={item.title || `Gallery image ${index + 1}`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </motion.div>
+      )}
+
+      {/* Glassmorphic overlay on hover */}
+      <motion.div
+        className="absolute inset-0 backdrop-blur-[2px] bg-gradient-to-tr from-purple-500/20 via-cyan-500/10 to-pink-500/20 pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isHovered ? 1 : 0 }}
+        transition={{ duration: 0.4 }}
+      />
+      
+      {/* Animated border */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          background: isHovered 
+            ? "linear-gradient(135deg, rgba(100, 200, 255, 0.3) 0%, transparent 50%, rgba(200, 100, 255, 0.3) 100%)"
+            : "none",
+          padding: "1px",
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMaskComposite: "xor",
+          maskComposite: "exclude",
+        }}
+        animate={{
+          opacity: isHovered ? 1 : 0,
+        }}
+        transition={{ duration: 0.4 }}
+      />
+
+      {/* Corner accents */}
+      {isHovered && (
+        <>
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-cyan-400 rounded-tl-lg"
+          />
+          <motion.div
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-purple-400 rounded-br-lg"
+          />
+        </>
       )}
 
       {/* Desktop: Hover overlay for images */}
@@ -207,13 +265,13 @@ function MediaCard({ item, index }: MediaCardProps) {
               e.stopPropagation();
               toggleMobileOverlay();
             }}
-            className="md:hidden absolute bottom-3 right-3 w-10 h-10 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-20"
+            className="md:hidden absolute bottom-4 right-4 w-8 h-8 bg-purple-900/50 backdrop-blur-sm rounded-lg border border-purple-500/40 flex items-center justify-center hover:bg-purple-800/60 transition-colors z-20"
             aria-label="Show info"
           >
-            <Info className="w-5 h-5 text-white" />
-          </motion.button>
-        )}
-      </AnimatePresence>
+            <Info className="w-4 h-4 text-purple-300" />
+          </button>
+        </>
+      )}
 
       {/* Overlay when info is clicked (for both images and videos) */}
       <AnimatePresence>
