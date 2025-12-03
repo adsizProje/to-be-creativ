@@ -17,7 +17,7 @@ export default function MediaGallery({ items }: MediaGalleryProps) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
-      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 lg:gap-10 px-4 md:px-8 lg:px-12 w-full max-w-[1920px] mx-auto"
+      className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-1 md:gap-2 lg:gap-3 px-4 md:px-8 lg:px-12 w-full max-w-[1920px] mx-auto"
     >
       {items.map((item, index) => (
         <MediaCard key={index} item={item} index={index} />
@@ -77,7 +77,7 @@ function MediaCard({ item, index }: MediaCardProps) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.05, duration: 0.5 }}
-      className="relative aspect-[16/9] overflow-hidden rounded-2xl cursor-pointer group w-full"
+      className="relative aspect-[16/9] overflow-hidden rounded-2xl cursor-none group w-full"
       style={{ 
         transformStyle: "preserve-3d",
         boxShadow: isHovered 

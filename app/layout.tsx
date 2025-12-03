@@ -30,7 +30,7 @@ const baloo = localFont({
 
 export const metadata: Metadata = {
   title: "ToBe Creative",
-  description: "We help brands to be",
+  description: "We help companies to be",
 };
 
 export default function RootLayout({

@@ -14,6 +14,11 @@ body {
   cursor: auto;
 }
 
+button, a,
+[role="button"] {
+  cursor: none !important;
+}
+
 /* Custom cursor only for desktop (1200px+) */
 @media (min-width: 1200px) {
   body {

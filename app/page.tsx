@@ -339,18 +339,18 @@ export default function Home() {
                     />
                   </motion.div>
                   <motion.div
-                    className="flex flex-col items-center justify-center space-y-1"
+                    className="flex flex-col items-center justify-center space-y-1 text-white"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.8 }}
                   >
                     <ShinyText 
-                      text="we help brands" 
+                      text="we help companies" 
                       speed={3} 
                       className="text-2xl md:text-4xl font-bold text-center"
                     />
                     <ShinyText 
-                      text="to be creative" 
+                      text="to be" 
                       speed={3} 
                       className="text-2xl md:text-4xl font-bold text-center"
                     />
