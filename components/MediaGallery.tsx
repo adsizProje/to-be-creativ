@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useRef } from "react";
 import { GalleryItem } from "./galleryData";
@@ -117,32 +117,44 @@ function MediaCard({ item, index }: MediaCardProps) {
           {/* Desktop: No controls needed, hover plays */}
           
           {/* Mobile: Play button (centered) */}
-          {!isPlaying && !showOverlay && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleMobilePlay();
-              }}
-              className="md:hidden absolute inset-0 m-auto w-16 h-16 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-10"
-              aria-label="Play video"
-            >
-              <Play className="w-8 h-8 text-white ml-1" fill="white" />
-            </button>
-          )}
+          <AnimatePresence>
+            {!isPlaying && !showOverlay && (
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleMobilePlay();
+                }}
+                className="md:hidden absolute inset-0 m-auto w-16 h-16 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-10"
+                aria-label="Play video"
+              >
+                <Play className="w-8 h-8 text-white ml-1" fill="white" />
+              </motion.button>
+            )}
+          </AnimatePresence>
 
           {/* Pause button (bottom right) - visible only on mobile when playing */}
-          {isPlaying && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleMobilePause();
-              }}
-              className="md:hidden absolute bottom-3 right-3 w-10 h-10 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-20"
-              aria-label="Pause video"
-            >
-              <Pause className="w-5 h-5 text-white" fill="white" />
-            </button>
-          )}
+          <AnimatePresence>
+            {isPlaying && (
+              <motion.button
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleMobilePause();
+                }}
+                className="md:hidden absolute bottom-3 right-3 w-10 h-10 bg-black/60 rounded-full flex items-center justify-center hover:bg-black/80 transition-colors z-20"
+                aria-label="Pause video"
+              >
+                <Pause className="w-5 h-5 text-white" fill="white" />
+              </motion.button>
+            )}
+          </AnimatePresence>
 
           {/* Video: Info button (top right on mobile, bottom right on desktop) */}
           {hasContent && !showOverlay && (
@@ -242,9 +254,13 @@ function MediaCard({ item, index }: MediaCardProps) {
       )}
 
       {/* Image: Info button (bottom right) - only for images */}
-      {!item.isVideo && hasContent && (
-        <>
-          <button
+      <AnimatePresence>
+        {!item.isVideo && hasContent && !showOverlay && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0, rotate: -180 }}
+            animate={{ scale: 1, opacity: 1, rotate: 0 }}
+            exit={{ scale: 0, opacity: 0, rotate: 180 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
             onClick={(e) => {
               e.stopPropagation();
               toggleMobileOverlay();
@@ -258,40 +274,52 @@ function MediaCard({ item, index }: MediaCardProps) {
       )}
 
       {/* Overlay when info is clicked (for both images and videos) */}
-      {hasContent && (
-        <>
-          {showOverlay && (
-            <div
-              className="absolute inset-0 bg-black/80 z-30 p-4 flex flex-col justify-between"
+      <AnimatePresence>
+        {hasContent && showOverlay && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="absolute inset-0 bg-black/80 z-30 p-4 flex flex-col justify-between"
+            onClick={toggleMobileOverlay}
+          >
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
+              className="flex-1 flex flex-col justify-center"
+            >
+              <h3 className="text-white font-semibold text-xl mb-3">
+                {item.title}
+              </h3>
+              <p className="text-white text-base mb-4">{item.description}</p>
+              {item.link && (
+                <a
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-blue-300 underline"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Learn More
+                </a>
+              )}
+            </motion.div>
+            <motion.button
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 20, opacity: 0 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+              className="self-start text-white text-sm underline"
               onClick={toggleMobileOverlay}
             >
-              <div className="flex-1 flex flex-col justify-center">
-                <h3 className="text-white font-semibold text-xl mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-white text-base mb-4">{item.description}</p>
-                {item.link && (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-400 hover:text-blue-300 underline"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    Learn More
-                  </a>
-                )}
-              </div>
-              <button
-                className="self-start text-white text-sm underline"
-                onClick={toggleMobileOverlay}
-              >
-                Close
-              </button>
-            </div>
-          )}
-        </>
-      )}
+              Close
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
