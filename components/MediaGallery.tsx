@@ -188,13 +188,15 @@ function MediaCard({ item, index }: MediaCardProps) {
         </motion.div>
       )}
 
-      {/* Glassmorphic overlay on hover */}
-      <motion.div
-        className="absolute inset-0 backdrop-blur-[2px] bg-gradient-to-tr from-purple-500/20 via-cyan-500/10 to-pink-500/20 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.4 }}
-      />
+      {/* Glassmorphic overlay on hover - only for images */}
+      {!item.isVideo && (
+        <motion.div
+          className="absolute inset-0 backdrop-blur-[2px] bg-gradient-to-tr from-purple-500/20 via-cyan-500/10 to-pink-500/20 pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.4 }}
+        />
+      )}
       
       {/* Animated border */}
       <motion.div

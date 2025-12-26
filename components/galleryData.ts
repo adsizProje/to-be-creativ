@@ -101,21 +101,21 @@ export const graphicItems: GalleryItem[] = [
 // Animation Gallery Items
 export const animationItems: GalleryItem[] = [
   {
-    source: "/assets/example_vid1.mp4",
+    source: "/assets/beach.nu_3.mp4",
     title: "Motion Graphics",
     description: "Dynamic animations with smooth movements",
     link: null,
     isVideo: true,
   },
   {
-    source: "/assets/example_vid1.mp4",
+    source: "/assets/shagongalaxy_shortfilm_TOBE.mp4",
     title: "Video Production",
     description: "Professional video editing and effects",
     link: null,
     isVideo: true,
   },
   {
-    source: "/assets/example_vid1.mp4",
+    source: "/assets/Olsem_Garage_Final_CC_TOBE.mp4",
     title: "3D Animation",
     description: "Three dimensional visuals and transitions",
     link: null,
